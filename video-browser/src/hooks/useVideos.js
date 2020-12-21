@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import youtube from '../apis/youtube'
 
-const useVideos = () => {
+const useVideos = (defaultSearchTerm) => {
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
-        onTermSubmit('buildings')
+        search(defaultSearchTerm)
     }, [])
 
-    const onTermSubmit = async (term) => {
+    const search = async (term) => {
         const response = await youtube.get("/search", {
             params: {
                 q: term,
@@ -16,9 +16,10 @@ const useVideos = () => {
         });
 
         setVideos(response.data.items)
-        
     };
-    
+
+    return [videos, search]
+
 }
 
 export default useVideos
