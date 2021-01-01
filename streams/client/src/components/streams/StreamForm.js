@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm } from "redux-form"; 
 
 class StreamForm extends React.Component {
     renderError({ error, touched }) {
@@ -59,6 +59,7 @@ const validate = (formValues) => {
 
     return errors
 }
+
 
 export default reduxForm({
     form: "streamForm",
