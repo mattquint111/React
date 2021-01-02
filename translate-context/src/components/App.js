@@ -1,32 +1,24 @@
-import React, { Component } from 'react'
-import 'semantic-ui-css/semantic.min.css'
-import UserCreate from './UserCreate'
-import LanguageContext from '../contexts/LanguageContext'
-import ColorContext from '../contexts/ColorContext'
+import React, { Component } from "react";
+import "semantic-ui-css/semantic.min.css";
+import UserCreate from "./UserCreate";
+import { LanguageStore } from "../contexts/LanguageContext";
+import ColorContext from "../contexts/ColorContext";
+import LanguageSelector from "./LanguageSelector";
 
 class App extends Component {
-    state = { language: 'english' }
-
-    onLanguageChange = language => {
-        this.setState({ language })
-    }
 
     render() {
-    return(
-        <div className="ui container">
-            <div>
-                Select a language: 
-                <i className="flag us" onClick={() => this.onLanguageChange('english')} />
-                <i className="flag nl" onClick={() => this.onLanguageChange('dutch')} />
+        return (
+            <div className="ui container">
+                <LanguageStore>
+                    <LanguageSelector />
+                    <ColorContext.Provider value="primary">
+                        <UserCreate />
+                    </ColorContext.Provider>
+                </LanguageStore>
             </div>
-            <LanguageContext.Provider value={this.state.language} >
-                <ColorContext.Provider value='primary' >
-                    <UserCreate />
-                </ColorContext.Provider>
-            </LanguageContext.Provider>
-        </div>
-    )
+        );
     }
 }
 
-export default App
+export default App;
